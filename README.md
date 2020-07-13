@@ -1,0 +1,2 @@
+# Pacer
+Running Splits Calculator
