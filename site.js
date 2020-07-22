@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const distanceInput = document.getElementById('distance');
     const time = document.getElementById('time');
     const submit = document.getElementById('splits');
+    const hopefulPace = document.getElementById('pace');
     let timeSplits;
     
     // Calculate the pace per mile
@@ -45,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return split;
     }
 
+    //Show the goal time.
+    function goalTimeCalc(distance, hopefulPace) {
+        const goalTime = distance * hopefulPace;
+        console.log(hopefulPace);
+        const totalTime = "Your total time for " + distance + " miles is " + goalTime;
+        return totalTime;
+    }
+
     const focusHandler = event => {
     event.target.className = 'highlight';
     };
@@ -76,8 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // When the user clicks on the button, open the modal
     btn.addEventListener('click', () => {
         modal.style.display = "block";
-        timeSplits = splits(distanceInput.value, time.value);
-        document.getElementById("pacing").innerHTML = timeSplits;
+        console.log(hopefulPace.value);
+        if(time.value) {
+            timeSplits = splits(distanceInput.value, time.value);
+            document.getElementById("pacing").innerHTML = timeSplits;
+        }
+        if (hopefulPace.value) {
+            totalTime = goalTimeCalc(distanceInput.value, hopefulPace.value);
+            document.getElementById("pacing").innerHTML = totalTime;
+        }
     });
 
     // When the user clicks on the print button, print the splits
